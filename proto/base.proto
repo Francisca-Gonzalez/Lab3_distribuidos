@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package grpc;
+
+option go_package = "./proto";
+
+message Message {
+    string body = 1;
+}
+message CommandAddUpdate{
+    string nombre_sector = 1;
+    string nombre_base = 2;
+    string valor = 3;
+}
+message CommandRename{
+    string nombre_sector = 1;
+    string nombre_base = 2;
+    string nuevo_nombre = 3;
+}
+message CommandDelete{
+    string nombre_sector = 1;
+    string nombre_base = 2;    
+}
+message CommandGet{
+    string nombre_sector = 1;
+    string nombre_base = 2;    
+}
+
+service MessageService {
+    rpc Intercambio (Message) returns (Message);    
+    rpc AgregarBase(CommandAddUpdate) returns (Message);
+    rpc RenombrarBase(CommandRename) returns (Message);
+    rpc ActualizarValor(CommandAddUpdate) returns (Message);
+    rpc BorrarBase(CommandDelete) returns (Message);
+    rpc GetSoldados(CommandGet) returns (Message);    
+}
